@@ -11,6 +11,8 @@ const Home = () => {
     return ( 
     <div className="home">
       <BlogList blogs={blogs} title="All Blogs" />
+      {/* Below is sample for Reusing componenets */}
+      <BlogList blogs={blogs.filter((blog) => blog.author === "Mario")} title="All Blogs" />
     </div>
      );
 }
