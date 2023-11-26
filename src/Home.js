@@ -1,49 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import BlogList from './BlogList';
+import useFetch from './useFetch';
 
 const Home = () => {
-    const [blogs, setBlogs] = useState(null);
-    const [isPending, setIsPending] = useState(true);
-    const [error, setError] = useState(null);
-   
-
-    //handles the delete of blogs, passed as props
-    // const handleDelete = (id) => {
-    //   const newBlogs = blogs.filter(blog => blog.id !== id);
-    //   setBlogs(newBlogs);
-    // }
-
-    useEffect(() => {
-      setTimeout(() => {
-        console.log("use effect ran");
-      fetch('http://localhost:8000/blogds')
-      .then(res => {
-        if(!res.ok){        //error throwing
-          throw Error('could not fetch the data for that resource');
-        }
-        return  res.json();
-      })
-      .then(data => {
-        console.log(data);
-        setBlogs(data);
-        setIsPending(false);
-        setError(null);
-      })
-      .catch(err =>{              //catching error, e.g. network error
-        // console.log(err.message);
-        setIsPending(false);
-        setError(err.message);
-      } )   
-      }, 1000);
-      
-    }, []); //dependecy array
+    const { data, isPending, error } = useFetch("http://localhost:8000/blogs");
+    // const { data: blogs, isPending, error } = useFetch("http://localhost:8000/blogs");
+    
 
     return ( 
     <div className="home">
-      {/* {blogs && <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete}/>}  --> for lesson 17*/}
       { error &&  <div>{error}</div> }
       {isPending && <div>Loading...</div> }
-      {blogs && <BlogList blogs={blogs} title="All Blogs"  />}
+      {data && <BlogList blogs={data} title="All Blogs"  />}
+      {/* {blogs && <BlogList blogs={blogs} title="All Blogs"  />} */}
     </div>
      );
 }
