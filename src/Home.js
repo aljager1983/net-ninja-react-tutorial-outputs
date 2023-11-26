@@ -8,8 +8,7 @@ const Home = () => {
         { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
     ]);
 
-    //used in useEffect dependcies
-    const [name, setName] = useState('mario');
+   
 
     //handles the delete of blogs, passed as props
     const handleDelete = (id) => {
@@ -19,18 +18,21 @@ const Home = () => {
 
     useEffect(() => {
       console.log("use effect ran");
-      console.log(name);
-    }, [name]); //dependecy array
+    }, []); //dependecy array
 
     return ( 
     <div className="home">
       <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete}/>
-      {/* Below is sample for Reusing componenets */}
-      {/* <BlogList blogs={blogs.filter((blog) => blog.author === "mario")} title="All Blogs" handleDelete={handleDelete}/> */}
-      <button onClick={() => setName('luigi')}> Change Name </button>
-      <p>{name}</p>
+     
     </div>
      );
 }
  
 export default Home;
+
+//npx json-server --watch data/db.json --port 8000
+//above line is to run json server on lesson 16
+//    /blogs        GET       fetch all blogs
+//    /blogs/{id}   GET       fetch a single blog
+//    /blogs        POST      add a new blog
+//    /blogs/{id}   DELETE    delete a blog
