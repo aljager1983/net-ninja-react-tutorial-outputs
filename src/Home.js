@@ -3,17 +3,19 @@ import BlogList from './BlogList';
 
 const Home = () => {
     const [blogs, setBlogs] = useState(null);
+    const [isPending, setIsPending] = useState(true);
 
    
 
     //handles the delete of blogs, passed as props
-    const handleDelete = (id) => {
-      const newBlogs = blogs.filter(blog => blog.id !== id);
-      setBlogs(newBlogs);
-    }
+    // const handleDelete = (id) => {
+    //   const newBlogs = blogs.filter(blog => blog.id !== id);
+    //   setBlogs(newBlogs);
+    // }
 
     useEffect(() => {
-      console.log("use effect ran");
+      setTimeout(() => {
+        console.log("use effect ran");
       fetch('http://localhost:8000/blogs')
       .then(res => {
         return  res.json();
@@ -21,13 +23,17 @@ const Home = () => {
       .then(data => {
         console.log(data);
         setBlogs(data);
+        setIsPending(false);
       })
+      }, 1000);
+      
     }, []); //dependecy array
 
     return ( 
     <div className="home">
-      {blogs && <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete}/>}
-     
+      {/* {blogs && <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete}/>}  --> for lesson 17*/}
+      {isPending && <div>Loading...</div> }
+      {blogs && <BlogList blogs={blogs} title="All Blogs"  />}
     </div>
      );
 }
