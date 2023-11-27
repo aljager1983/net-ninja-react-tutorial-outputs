@@ -7,9 +7,12 @@ const useFetch = (url) => {          //custom hooks requires the word "use-" oth
     const [error, setError] = useState(null);       
 
     useEffect(() => {
+
+      const abortCont = new AbortController();
+
         setTimeout(() => {
           console.log("use effect ran");
-        fetch(url)
+        fetch(url, {signal : abortCont.signal})            //abort controller added here as second argument to fetch
         .then(res => {
           if(!res.ok){        //error throwing
             throw Error('could not fetch the data for that resource');
@@ -27,6 +30,8 @@ const useFetch = (url) => {          //custom hooks requires the word "use-" oth
           setError(err.message);
         } )   
         }, 1000);
+
+      return () => abortCont.abort();     //cleaning up in useEffect
         
       }, [url]); //dependecy array
 
@@ -34,3 +39,7 @@ const useFetch = (url) => {          //custom hooks requires the word "use-" oth
 }
 
 export default useFetch;
+
+//lesson 24:
+// abort controllers are needed for cleanin up resources during useEffect
+// to avoid memory leaks
