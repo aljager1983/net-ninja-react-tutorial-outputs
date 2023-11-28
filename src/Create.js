@@ -4,11 +4,17 @@ const Create = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('mario');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const blog = {title, body, author};
+        console.log(blog);
+    }
     
     return ( 
         <div className="create">
             <h2>Add a new Blog</h2>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label>Blog title: </label>
                 <input type="text" 
                 required 
@@ -35,3 +41,7 @@ const Create = () => {
 }
  
 export default Create;
+
+//note
+//lesson 28--json server automcatically add's id's to entries
+//so no need to add in your json objects
