@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/net-ninja-react-tutorial-outputs/static/css/main.b3264b96.css",
+    "main.js": "/net-ninja-react-tutorial-outputs/static/js/main.479a0dc2.js",
+    "index.html": "/net-ninja-react-tutorial-outputs/index.html",
+    "main.b3264b96.css.map": "/net-ninja-react-tutorial-outputs/static/css/main.b3264b96.css.map",
+    "main.479a0dc2.js.map": "/net-ninja-react-tutorial-outputs/static/js/main.479a0dc2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b3264b96.css",
+    "static/js/main.479a0dc2.js"
+  ]
+}
